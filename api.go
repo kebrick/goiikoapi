@@ -209,13 +209,13 @@ func (c *Client) LastDataRaw() []byte {
 }
 
 // Методы для доступа к группам через интерфейсы
-func (c *Client) Dictionaries() IDictionaries { return c.Dictionaries }
-func (c *Client) Menu() IMenu { return c.Menu }
-func (c *Client) Orders() IOrders { return c.Orders }
-func (c *Client) Deliveries() IDeliveries { return c.Deliveries }
-func (c *Client) Address() IAddress { return c.Address }
-func (c *Client) TerminalGroup() ITerminalGroup { return c.TerminalGroup }
-func (c *Client) Customers() ICustomers { return c.Customers }
-func (c *Client) Notifications() INotifications { return c.Notifications }
-func (c *Client) Commands() ICommands { return c.Commands }
-func (c *Client) WebHook() IWebHook { return c.WebHook }
+func (c *Client) GetDictionaries() IDictionaries { return c.Dictionaries }
+func (c *Client) GetMenu() IMenu { return c.Menu }
+func (c *Client) GetOrders() IOrders { return c.Orders }
+func (c *Client) GetDeliveries() IDeliveries { return c.Deliveries }
+func (c *Client) GetAddress() IAddress { return c.Address }
+func (c *Client) GetTerminalGroup() ITerminalGroup { return c.TerminalGroup }
+func (c *Client) GetCustomers() ICustomers { return c.Customers }
+func (c *Client) GetNotifications() INotifications { return c.Notifications }
+func (c *Client) GetCommands() ICommands { return c.Commands }
+func (c *Client) GetWebHook() IWebHook { return c.WebHook }

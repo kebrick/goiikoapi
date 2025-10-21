@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // Orders содержит методы для работы с заказами
 type Orders struct {

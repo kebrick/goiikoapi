@@ -83,14 +83,14 @@ type IClient interface {
 	LastDataRaw() []byte
 	
 	// Группы методов
-	Dictionaries() IDictionaries
-	Menu() IMenu
-	Orders() IOrders
-	Deliveries() IDeliveries
-	Address() IAddress
-	TerminalGroup() ITerminalGroup
-	Customers() ICustomers
-	Notifications() INotifications
-	Commands() ICommands
-	WebHook() IWebHook
+	GetDictionaries() IDictionaries
+	GetMenu() IMenu
+	GetOrders() IOrders
+	GetDeliveries() IDeliveries
+	GetAddress() IAddress
+	GetTerminalGroup() ITerminalGroup
+	GetCustomers() ICustomers
+	GetNotifications() INotifications
+	GetCommands() ICommands
+	GetWebHook() IWebHook
 }

@@ -1,4 +1,4 @@
-package goiikoapi
+package main
 
 import (
 	"context"

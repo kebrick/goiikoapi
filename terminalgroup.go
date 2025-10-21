@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // TerminalGroup содержит методы для работы с группами терминалов
 type TerminalGroup struct {

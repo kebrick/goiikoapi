@@ -1,6 +1,55 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
+
+// CustomerCreateOrUpdateOption опции для создания/обновления клиента
+type CustomerCreateOrUpdateOption func(map[string]any)
+
+func WithCustomerID(id string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["id"] = id }
+}
+func WithCustomerPhone(phone string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["phone"] = phone }
+}
+func WithCustomerCardTrack(track string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["cardTrack"] = track }
+}
+func WithCustomerCardNumber(number string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["cardNumber"] = number }
+}
+func WithCustomerName(name string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["name"] = name }
+}
+func WithCustomerMiddleName(middleName string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["middleName"] = middleName }
+}
+func WithCustomerSurName(surName string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["surName"] = surName }
+}
+func WithCustomerBirthday(birthday string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["birthday"] = birthday }
+}
+func WithCustomerEmail(email string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["email"] = email }
+}
+func WithCustomerSex(sex string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["sex"] = sex }
+}
+func WithCustomerConsentStatus(status string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["consentStatus"] = status }
+}
+func WithCustomerShouldReceivePromoActionsInfo(should bool) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["shouldReceivePromoActionsInfo"] = should }
+}
+func WithCustomerReferrerID(referrerID string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["referrerId"] = referrerID }
+}
+func WithCustomerUserData(userData string) CustomerCreateOrUpdateOption {
+	return func(data map[string]any) { data["userData"] = userData }
+}
 
 // Customers содержит методы для работы с клиентами
 type Customers struct {

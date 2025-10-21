@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // Notifications содержит методы для работы с уведомлениями
 type Notifications struct {

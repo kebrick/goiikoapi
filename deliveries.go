@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // Deliveries содержит методы для работы с доставкой
 type Deliveries struct {

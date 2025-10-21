@@ -57,9 +57,9 @@ orgs, apiErr, err := cli.Organizations(ctx, nil, nil, nil)
 
 ```go
 // Получаем интерфейсы
-var dict IDictionaries = cli.Dictionaries()
-var menu IMenu = cli.Menu()
-var orders IOrders = cli.Orders()
+var dict IDictionaries = cli.GetDictionaries()
+var menu IMenu = cli.GetMenu()
+var orders IOrders = cli.GetOrders()
 
 // Работаем через интерфейсы
 orderTypes, _, _ := dict.OrderTypes(ctx, []string{"orgId"})
@@ -90,7 +90,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, orgID string) (*BaseCrea
 }
 
 // Использование
-service := NewOrderService(cli.Orders(), cli.Menu())
+service := NewOrderService(cli.GetOrders(), cli.GetMenu())
 order, err := service.CreateOrder(ctx, "orgId")
 ```
 

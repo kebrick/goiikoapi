@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // Menu содержит методы для работы с меню
 type Menu struct {

@@ -493,14 +493,14 @@ type CombosItemOrderModel struct {
 	SourceID string  `json:"sourceId"`
 }
 
-type PaymentTypeModel struct {
+type PaymentTypeOrderModel struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 	Kind string `json:"kind"`
 }
 
 type PaymentItemOrderModel struct {
-	PaymentType           PaymentTypeModel `json:"paymentType"`
+	PaymentType           PaymentTypeOrderModel `json:"paymentType"`
 	Sum                   float64          `json:"sum"`
 	IsPreliminary         bool             `json:"isPreliminary"`
 	IsExternal            bool             `json:"isExternal"`
@@ -508,14 +508,14 @@ type PaymentItemOrderModel struct {
 	IsFiscalizedExternally *bool           `json:"isFiscalizedExternally,omitempty"`
 }
 
-type TipsTypeModel struct {
+type TipsTypeOrderModel struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 type TipsItemOrderModel struct {
-	TipsType              TipsTypeModel    `json:"tipsType"`
-	PaymentType           PaymentTypeModel `json:"paymentType"`
+	TipsType              TipsTypeOrderModel    `json:"tipsType"`
+	PaymentType           PaymentTypeOrderModel `json:"paymentType"`
 	Sum                   float64          `json:"sum"`
 	IsPreliminary         bool             `json:"isPreliminary"`
 	IsExternal            bool             `json:"isExternal"`
@@ -544,7 +544,7 @@ type OrderItemDeletedModel struct {
 	DeletionMethod *OrderItemDeletionMethodModel `json:"deletionMethod,omitempty"`
 }
 
-type OrderTypeModel struct {
+type OrderTypeOrderModel struct {
 	ID               string `json:"id"`
 	Name             string `json:"name"`
 	OrderServiceType string `json:"orderServiceType"`

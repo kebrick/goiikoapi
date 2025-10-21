@@ -1,6 +1,9 @@
 package goiikoapi
 
-import "context"
+import (
+	"context"
+	"encoding/json"
+)
 
 // Dictionaries содержит методы для работы со словарями
 type Dictionaries struct {
