@@ -883,20 +883,51 @@ type WebHookDeliveryOrderEventInfoModel struct {
 }
 
 // Employees models
-type CourierItemModel struct {
-	Employee EmployeeModel `json:"employee"`
-	Phone    *string       `json:"phone,omitempty"`
+type EmployeeItemModel struct {
+	ID          string  `json:"id"`
+	FirstName   *string `json:"firstName,omitempty"`
+	MiddleName  *string `json:"middleName,omitempty"`
+	LastName    *string `json:"lastName,omitempty"`
+	DisplayName string  `json:"displayName"`
+	Code        *string `json:"code,omitempty"`
+	IsDeleted   bool    `json:"isDeleted"`
 }
 
-type CouriersByOrganizationModel struct {
-	OrganizationID string             `json:"organizationId"`
-	Items          []CourierItemModel `json:"items"`
+type EmployeesByOrganizationModel struct {
+	OrganizationID string              `json:"organizationId"`
+	Items          []EmployeeItemModel `json:"items"`
 }
 
-type BaseCouriersModel struct {
+func (e *EmployeesByOrganizationModel) GetActive() []EmployeeItemModel {
+	var els []EmployeeItemModel
+	for _, item := range e.Items {
+		if !item.IsDeleted {
+			els = append(els, item)
+		}
+	}
+	return els
+}
+
+func (e *EmployeesByOrganizationModel) GetNoActive() []EmployeeItemModel {
+	var els []EmployeeItemModel
+	for _, item := range e.Items {
+		if item.IsDeleted {
+			els = append(els, item)
+		}
+	}
+	return els
+}
+type BaseEmployeesModel struct {
 	BaseResponseModel
-	Employees []CouriersByOrganizationModel `json:"employees,omitempty"`
+	Employees []EmployeesByOrganizationModel `json:"employees,omitempty"`
 }
+
+// CourierItemModel используется для курьеров (Legacy)
+type CourierItemModel = EmployeeItemModel
+
+type CouriersByOrganizationModel = EmployeesByOrganizationModel
+
+type BaseCouriersModel = BaseEmployeesModel
 
 type EmployeeInfoModel struct {
 	Employee EmployeeModel `json:"employee"`

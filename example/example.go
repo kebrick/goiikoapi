@@ -48,7 +48,11 @@ func main() {
 		employees,_,_ := cli.Employees.Couriers(ctx, orgs.ListIDs())
 		fmt.Println("Employess orgs: ", len(employees.Employees))
 		for _,employee := range employees.Employees {
-			fmt.Println("Employee items:",len(employee.Items))
+			fmt.Println("\tEmployee active    items:",len(employee.GetActive()))
+			fmt.Println("\tEmployee no active items:",len(employee.GetNoActive()))
+			for _, item := range employee.GetActive(){
+				fmt.Println("\t\t", item.DisplayName)
+			}
 		}
 	}
 }
