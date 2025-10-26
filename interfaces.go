@@ -76,12 +76,22 @@ type IWebHook interface {
 	ParseWebhookReserve(data []map[string]any) ([]WebHookDeliveryOrderEventInfoModel, error)
 }
 
+// IEmployees интерфейс для работы с сотрудниками
+type IEmployees interface {
+	Couriers(ctx context.Context, organizationIDs []string) (*BaseCouriersModel, *CustomErrorModel, error)
+	EmployeeInfo(ctx context.Context, organizationID, id string) (*BaseEmployeeInfoModel, *CustomErrorModel, error)
+	ShiftClockin(ctx context.Context, organizationID, terminalGroupID, employeeID string, roleID *string) (*BaseResponseModel, *CustomErrorModel, error)
+	ShiftClockout(ctx context.Context, organizationID, terminalGroupID, employeeID string) (*BaseResponseModel, *CustomErrorModel, error)
+	ShiftIsOpen(ctx context.Context, organizationID, terminalGroupID, employeeID string) (*BaseEmployeeInfoModel, *CustomErrorModel, error)
+	ShiftByCourier(ctx context.Context, employeeID string) (*BaseEmployeeTerminalModel, *CustomErrorModel, error)
+}
+
 // IClient основной интерфейс клиента
 type IClient interface {
 	// Базовые методы
 	Organizations(ctx context.Context, organizationIDs []string, returnAdditionalInfo, includeDisabled *bool) (*BaseOrganizationsModel, *CustomErrorModel, error)
 	LastDataRaw() []byte
-	
+
 	// Группы методов
 	GetDictionaries() IDictionaries
 	GetMenu() IMenu
@@ -93,4 +103,5 @@ type IClient interface {
 	GetNotifications() INotifications
 	GetCommands() ICommands
 	GetWebHook() IWebHook
+	GetEmployees() IEmployees
 }

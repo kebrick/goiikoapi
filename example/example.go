@@ -34,7 +34,7 @@ func main() {
 	// Пример работы через интерфейсы
 	if len(orgs.Organizations) > 0 {
 		orgID := orgs.Organizations[0].ID
-		
+
 		// Получаем словари
 		dict := cli.GetDictionaries()
 		orderTypes, _, _ := dict.OrderTypes(ctx, []string{orgID})
@@ -44,5 +44,11 @@ func main() {
 		menu := cli.GetMenu()
 		nomenclature, _, _ := menu.Nomenclature(ctx, orgID, nil)
 		fmt.Println("Nomenclature groups count:", len(nomenclature.Groups))
+
+		employees,_,_ := cli.Employees.Couriers(ctx, orgs.ListIDs())
+		fmt.Println("Employess orgs: ", len(employees.Employees))
+		for _,employee := range employees.Employees {
+			fmt.Println("Employee items:",len(employee.Items))
+		}
 	}
 }
