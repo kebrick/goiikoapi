@@ -616,7 +616,7 @@ type CreatedDeliveryOrderModel struct {
 	Discounts                []DiscountsItemOrderModel         `json:"discounts,omitempty"`
 	OrderType                *OrderTypeModel                   `json:"orderType,omitempty"`
 	TerminalGroupID          string                            `json:"terminalGroupId"`
-	ProcessedPaymentsSum     *int                              `json:"processedPaymentsSum,omitempty"`
+	ProcessedPaymentsSum     *float64                         `json:"processedPaymentsSum,omitempty"`
 }
 
 type ErrorInfoModel struct {
