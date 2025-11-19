@@ -56,9 +56,9 @@ func (d *Deliveries) UpdateOrderDeliveryStatus(ctx context.Context, organization
 }
 
 // Confirm реплицирует Deliveries.confirm
-func (d *Deliveries) Confirm(ctx context.Context, organizationIDs []string, orderID string) (*BaseResponseModel, *CustomErrorModel, error) {
+func (d *Deliveries) Confirm(ctx context.Context, organizationID string, orderID string) (*BaseResponseModel, *CustomErrorModel, error) {
 	data := map[string]any{
-		"organizationIds": organizationIDs,
+		"organizationId": organizationID,
 		"orderId": orderID,
 	}
 	body, status, err := d.client.post(ctx, "/api/1/deliveries/confirm", data)
