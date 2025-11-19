@@ -106,3 +106,61 @@ func (d *Deliveries) ByDeliveryDateAndStatus(ctx context.Context, organizationID
 	if err := json.Unmarshal(body, &out); err != nil { return nil, nil, err }
 	return &out, nil, nil
 }
+
+// ByDeliveryDateAndSourceKeyAndFilter реплицирует Deliveries.by_delivery_date_and_source_key_and_filter
+func (d *Deliveries) ByDeliveryDateAndSourceKeyAndFilter(ctx context.Context, organizationIDs []string, terminalGroupIDs []string, deliveryDateFrom, deliveryDateTo *string, statuses []string, hasProblem *bool, orderServiceType, searchText *string, timeToCookingErrorTimeout, cookingTimeout *int, sortProperty, sortDirection *string, rowsCount *int, sourceKeys, orderIDs []string) (*ByDeliveryDateAndSourceKeyAndFilter, *CustomErrorModel, error) {
+	data := map[string]any{
+		"organizationIds": organizationIDs,
+	}
+	if len(terminalGroupIDs) > 0 {
+		data["terminalGroupIds"] = terminalGroupIDs
+	}
+	if deliveryDateFrom != nil {
+		data["deliveryDateFrom"] = *deliveryDateFrom
+	}
+	if deliveryDateTo != nil {
+		data["deliveryDateTo"] = *deliveryDateTo
+	}
+	if len(statuses) > 0 {
+		data["statuses"] = statuses
+	}
+	if hasProblem != nil {
+		data["hasProblem"] = *hasProblem
+	}
+	if orderServiceType != nil {
+		data["orderServiceType"] = *orderServiceType
+	}
+	if searchText != nil {
+		data["searchText"] = *searchText
+	}
+	if timeToCookingErrorTimeout != nil {
+		data["timeToCookingErrorTimeout"] = *timeToCookingErrorTimeout
+	}
+	if cookingTimeout != nil {
+		data["cookingTimeout"] = *cookingTimeout
+	}
+	if sortProperty != nil {
+		data["sortProperty"] = *sortProperty
+	}
+	if sortDirection != nil {
+		data["sortDirection"] = *sortDirection
+	}
+	if rowsCount != nil {
+		data["rowsCount"] = *rowsCount
+	}
+	if len(sourceKeys) > 0 {
+		data["sourceKeys"] = sourceKeys
+	}
+	if len(orderIDs) > 0 {
+		data["orderIds"] = orderIDs
+	}
+	
+	body, status, err := d.client.post(ctx, "/api/1/deliveries/by_delivery_date_and_source_key_and_filter", data)
+	if err != nil { return nil, nil, err }
+	if msg, ok := DetectAPIError(body); ok {
+		return nil, &CustomErrorModel{ErrorModel: ErrorModel{ErrorDescription: msg}, StatusCode: status}, nil
+	}
+	var out ByDeliveryDateAndSourceKeyAndFilter
+	if err := json.Unmarshal(body, &out); err != nil { return nil, nil, err }
+	return &out, nil, nil
+}
