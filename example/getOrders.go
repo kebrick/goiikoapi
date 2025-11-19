@@ -16,7 +16,7 @@ func main() {
 	endOfDay := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 999999999, now.Location())
 
 	cli, err := goiikoapi.NewClient(
-		"c657d7dd151f49a187958e857db39e37",
+		"API_LOGIN",
 		goiikoapi.WithTimeout(30*time.Second),
 	)
 	if err != nil {
@@ -76,13 +76,6 @@ func main() {
 			}
 		}
 	}
-	byID, apiErr, err :=cli.Deliveries.Confirm(ctx, orgs.ListIDs(), "827bcec0-3b93-4689-867b-52658ac7d0c0")
 
-	if err != nil {
-		log.Fatal("Transpo rt error:", err)
-	}
-	if apiErr != nil {
-		log.Fatal("API error:", apiErr.ErrorDescription)
-	}
-	fmt.Println(byID)
+
 }

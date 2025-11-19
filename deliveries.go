@@ -36,14 +36,14 @@ func (d *Deliveries) DeliveryCreate(ctx context.Context, organizationID string, 
 }
 
 // UpdateOrderDeliveryStatus реплицирует Deliveries.update_order_delivery_status
-func (d *Deliveries) UpdateOrderDeliveryStatus(ctx context.Context, organizationIDs []string, orderID, deliveryStatus, deliveryDate string) (*BaseResponseModel, *CustomErrorModel, error) {
+func (d *Deliveries) UpdateOrderDeliveryStatus(ctx context.Context, organizationID string, orderID string, deliveryStatus string, deliveryDate *string) (*BaseResponseModel, *CustomErrorModel, error) {
 	data := map[string]any{
-		"organizationIds": organizationIDs,
+		"organizationId": organizationID,
 		"orderId": orderID,
 		"deliveryStatus": deliveryStatus,
 	}
-	if deliveryStatus == "Delivered" && deliveryDate != "" {
-		data["deliveryDate"] = deliveryDate
+	if deliveryStatus == "Delivered" && deliveryDate != nil {
+		data["deliveryDate"] = *deliveryDate
 	}
 	body, status, err := d.client.post(ctx, "/api/1/deliveries/update_order_delivery_status", data)
 	if err != nil { return nil, nil, err }

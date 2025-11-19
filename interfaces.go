@@ -28,7 +28,7 @@ type IOrders interface {
 // IDeliveries интерфейс для работы с доставкой
 type IDeliveries interface {
 	DeliveryCreate(ctx context.Context, organizationID string, order map[string]any, terminalGroupID *string, createOrderSettings *int) (*BaseCreatedDeliveryOrderInfoModel, *CustomErrorModel, error)
-	UpdateOrderDeliveryStatus(ctx context.Context, organizationIDs []string, orderID, deliveryStatus, deliveryDate string) (*BaseResponseModel, *CustomErrorModel, error)
+	UpdateOrderDeliveryStatus(ctx context.Context, organizationID string, orderID, deliveryStatus, deliveryDate string) (*BaseResponseModel, *CustomErrorModel, error)
 	Confirm(ctx context.Context, organizationID string, orderID string) (*BaseResponseModel, *CustomErrorModel, error)
 	CancelConfirmation(ctx context.Context, organizationIDs []string, orderID string) (*BaseResponseModel, *CustomErrorModel, error)
 	ByDeliveryDateAndStatus(ctx context.Context, organizationIDs []string, deliveryDateFrom, deliveryDateTo string, statuses, sourceKeys []string) (*ByDeliveryDateAndStatusModel, *CustomErrorModel, error)
