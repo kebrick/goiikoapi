@@ -930,7 +930,14 @@ type CouriersByOrganizationModel = EmployeesByOrganizationModel
 type BaseCouriersModel = BaseEmployeesModel
 
 type EmployeeInfoModel struct {
-	Employee EmployeeModel `json:"employee"`
+	ID          string  `json:"id"`
+	FirstName   *string `json:"firstName,omitempty"`
+	MiddleName  *string `json:"middleName,omitempty"`
+	LastName    *string `json:"lastName,omitempty"`
+	DisplayName string  `json:"displayName"`
+	Email       *string `json:"email,omitempty"`
+	Phone       *string `json:"phone,omitempty"`
+	CellPhone   *string `json:"cellPhone,omitempty"`
 }
 
 type BaseEmployeeInfoModel struct {
