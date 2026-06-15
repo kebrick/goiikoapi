@@ -15,6 +15,7 @@ ctx := context.Background()
 
 cli, err := goiikoapi.NewClient(
     "<YOUR_API_LOGIN>",
+    goiikoapi.WithAppId("<YOUR_APP_ID>", "<YOUR_CLIENT_SECRET>"),
     goiikoapi.WithTimeout(30*time.Second),
 )
 if err != nil { /* handle */ }
