@@ -13,17 +13,19 @@ import (
 
 // Client реализует базовый доступ к iiko cloud API
 type Client struct {
-	apiLogin    string
-	baseURL     string
-	returnDict  bool
-	debug       bool
-	client      *http.Client
-	defaultTO   time.Duration
-	headers     http.Header
-	mu          sync.RWMutex
-	token       string
-	tokenAt     time.Time
-	lastDataRaw []byte
+	apiLogin     string
+	baseURL      string
+	returnDict   bool
+	debug        bool
+	client       *http.Client
+	defaultTO    time.Duration
+	headers      http.Header
+	mu           sync.RWMutex
+	appId        string
+	clientSecret string
+	token        string
+	tokenAt      time.Time
+	lastDataRaw  []byte
 
 	organizationsIDs []string
 
@@ -98,6 +100,12 @@ func WithHTTPClient(hc *http.Client) Option {
 		}
 	}
 }
+func WithAppId(appId string, clientSecret string) Option {
+	return func(c *Client) {
+		c.appId = appId
+		c.clientSecret = clientSecret
+	}
+}
 func WithTimeout(d time.Duration) Option {
 	return func(c *Client) { c.defaultTO = d; c.client.Timeout = d }
 }
@@ -130,8 +138,17 @@ func (c *Client) tokenExpired() bool {
 
 func (c *Client) refreshToken(ctx context.Context) error {
 	data := map[string]string{"apiLogin": c.apiLogin}
+	var requestUri string
+	if c.appId == "" {
+		requestUri = c.baseURL + "/api/1/access_token"
+	} else {
+		requestUri = c.baseURL + "/api/v2/access_token"
+		data["appId"] = c.appId
+		data["clientSecret"] = c.clientSecret
+	}
+
 	body, _ := json.Marshal(data)
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.baseURL+"/api/1/access_token", bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, requestUri, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
